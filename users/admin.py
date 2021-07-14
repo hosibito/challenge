@@ -10,8 +10,7 @@ class CostomUserAdmin(UserAdmin):
     list_display = UserAdmin.list_display + (
         "language",
         "preference",
-        "favourite_book_genre",
-        "favourite_movie_genre",
+       
     )
 
     list_filter = UserAdmin.list_filter + (

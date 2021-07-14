@@ -33,8 +33,8 @@ class User(AbstractUser):
     bio = models.TextField(blank=True)
     preference = models.CharField(choices=PREFERENCE_CHOICES, max_length=6, default=PREFERENCE_BOOKS)
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, default=LANGUAGE_KOREAN)
-    favourite_book_genre = models.CharField(choices=GENRE_CHOICES,  max_length=10, blank=True)  # 나중에 ManyToManyField 로 될듯
-    favourite_movie_genre = models.CharField(choices=GENRE_CHOICES, max_length=10, blank=True) # 나중에 ManyToManyField 로 될듯
+    favourite_book_genre = models.ManyToManyField("categories.Category",related_name='Category_book', blank=True)   
+    favourite_movie_genre = models.ManyToManyField("categories.Category",related_name='Category_movie', blank=True)
 
 
 '''
