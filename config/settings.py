@@ -45,6 +45,12 @@ THIRD_PARTY_APPS = [
 
 PROJECT_APPS = [    
     "users.apps.UsersConfig",
+    "books.apps.BooksConfig",
+    "categories.apps.CategoriesConfig",
+    "favs.apps.FavsConfig",
+    "movies.apps.MoviesConfig",
+    "people.apps.PeopleConfig",
+    "reviews.apps.ReviewsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
