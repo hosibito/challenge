@@ -5,4 +5,6 @@ from . import models
 class CategoryAdmin(admin.ModelAdmin):
 
     """Category Admin Definition"""
-    pass
+    list_display = ("name", "kind",)
+    list_filter = ("kind", )
+

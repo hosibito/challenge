@@ -1,4 +1,5 @@
 from django.db import models
+from core import models as core_models
 
 # Create your models here.
 """
@@ -18,7 +19,7 @@ KIND_CHOICES = (
   (KIND_BOTH, "both"),
 )
 
-class Category(models.Model):
+class Category(core_models.TimeStampedModel):
       
   """Person Model Definition"""
 

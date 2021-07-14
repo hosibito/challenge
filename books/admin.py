@@ -5,4 +5,5 @@ from . import models
 class BookAdmin(admin.ModelAdmin):
 
     """Book Admin Definition"""
-    pass
+    list_display = ("title", "year", "category", "rating", "writer")
+    list_filter = ("category", "rating", "writer")

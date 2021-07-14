@@ -1,5 +1,7 @@
 from django.db import models
 
+from core import models as core_models
+
 # Create your models here.
 
 """
@@ -9,17 +11,17 @@ from django.db import models
   photo
 """
 
-KIND_ACTOR = "Actor"
-KIND_DIRECTOR = "Director"
-KIND_WRITER = "Writer"
+# KIND_ACTOR = "Actor"
+# KIND_DIRECTOR = "Director"
+# KIND_WRITER = "Writer"
 
-KIND_CHOICES = (
-  (KIND_ACTOR, "Actor"),
-  (KIND_DIRECTOR, "Director"),
-  (KIND_WRITER, "Writer"),
-)
+# KIND_CHOICES = (
+#   (KIND_ACTOR, "Actor"),
+#   (KIND_DIRECTOR, "Director"),
+#   (KIND_WRITER, "Writer"),
+# )
 
-class Person(models.Model):
+class Person(core_models.TimeStampedModel):
       
   """Person Model Definition"""
 
@@ -28,24 +30,22 @@ class Person(models.Model):
 
   class Meta:
     abstract = True
+
+  def __str__(self):
+        return self.name
   
 class Person_Actor(Person):
       
   """Person_Actor Model Definition"""
+  pass
 
-  def __str__(self):
-    return self.name
-
+  
 class Person_Director(Person):
       
   """Person_Director Model Definition"""
-
-  def __str__(self):
-    return self.name
+  pass
 
 class Person_Writer(Person):
       
   """Person_Writer Model Definition"""
-
-  def __str__(self):
-    return self.name
+  pass

@@ -1,5 +1,7 @@
 from django.db import models
 
+from core import models as core_models
+
 # Create your models here.
 """
 Here are the models you have to create:
@@ -13,7 +15,7 @@ Here are the models you have to create:
   cast (ManyToMany => people.Person)
 """
 
-class Movie(models.Model):
+class Movie(core_models.TimeStampedModel):
       
   """Movie Model Definition"""
 

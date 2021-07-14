@@ -5,4 +5,5 @@ from . import models
 class MovieAdmin(admin.ModelAdmin):
 
     """Movie Admin Definition"""
-    pass
+    list_display = ("title", "year", "category", "rating", "director")
+    list_filter = ("category", "rating", "director")
