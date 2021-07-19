@@ -1,51 +1,23 @@
 from django.db import models
+from core.models import CoreModel
 
-from core import models as core_models
+class Person(CoreModel):
 
-# Create your models here.
+  """ Person Model """
 
-"""
-- Person
-  name
-  kind (choice=Actor/Director/Writer)
-  photo
-"""
+  KIND_ACTOR = "actor"
+  KIND_DIRECTOR = "director"
+  KIND_WRITER = "writer"
 
-# KIND_ACTOR = "Actor"
-# KIND_DIRECTOR = "Director"
-# KIND_WRITER = "Writer"
+  KIND_CHOICES = (
+    (KIND_ACTOR, "Actor"),
+    (KIND_DIRECTOR, "Director"),
+    (KIND_WRITER, "Writer")
+  )
 
-# KIND_CHOICES = (
-#   (KIND_ACTOR, "Actor"),
-#   (KIND_DIRECTOR, "Director"),
-#   (KIND_WRITER, "Writer"),
-# )
-
-class Person(core_models.TimeStampedModel):
-      
-  """Person Model Definition"""
-
-  name = models.CharField(max_length=80)  
-  photo = models.ImageField( blank=True )
-
-  class Meta:
-    abstract = True
+  name = models.CharField(max_length=120)
+  photo = models.ImageField()
+  kind = models.CharField(max_length=15, choices=KIND_CHOICES)
 
   def __str__(self):
-        return self.name
-  
-class Person_Actor(Person):
-      
-  """Person_Actor Model Definition"""
-  pass
-
-  
-class Person_Director(Person):
-      
-  """Person_Director Model Definition"""
-  pass
-
-class Person_Writer(Person):
-      
-  """Person_Writer Model Definition"""
-  pass
+    return self.name

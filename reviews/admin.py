@@ -1,9 +1,9 @@
 from django.contrib import admin
-from . import models
+from reviews.models import Review
 
-@admin.register(models.Review)
+
+@admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
 
-    """Review Admin Definition"""
-    list_display = ("created_by", "movie", "book", "rating", )
-    list_filter = ("movie", "book", "rating")
+  list_display = ("created_by", "movie", "book", "rating")
+  list_filter = ("movie", "book")

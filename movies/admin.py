@@ -1,9 +1,15 @@
 from django.contrib import admin
-from . import models
+from movies.models import Movie
 
-@admin.register(models.Movie)
+@admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
 
-    """Movie Admin Definition"""
-    list_display = ("title", "year", "category", "rating", "director")
-    list_filter = ("category", "rating", "director")
+  list_display = (
+    "title",
+    "year",
+    "rating",
+  )
+  list_filter = (
+    "year",
+    "rating"
+  )

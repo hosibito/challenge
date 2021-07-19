@@ -1,10 +1,12 @@
 from django.contrib import admin
-from . import models
+from people.models import Person
 
-@admin.register(models.Person_Actor, models.Person_Director, models.Person_Writer)
+
+@admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
 
-    """Person Admin Definition"""
-    plist_display = ("name", "create", "update")
-    
-
+  list_display = (
+    "name",
+    "kind"
+  )
+  list_filter = ("kind",)

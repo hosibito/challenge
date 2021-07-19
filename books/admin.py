@@ -1,9 +1,18 @@
 from django.contrib import admin
-from . import models
+from books.models import Book
 
-@admin.register(models.Book)
+
+@admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
 
-    """Book Admin Definition"""
-    list_display = ("title", "year", "category", "rating", "writer")
-    list_filter = ("category", "rating", "writer")
+  list_display = (
+    "title",
+    "year",
+    "rating",
+  )
+  
+  list_filter = (
+    "year",
+    "rating",
+    "category"
+  )

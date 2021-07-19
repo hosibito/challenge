@@ -1,24 +1,15 @@
 from django.db import models
+from core.models import CoreModel
 
-from core import models as core_models
+class Review(CoreModel):
 
-# Create your models here.
-"""
-Here are the models you have to create:
-- Review
-  created_by (ForeignKey => users.User)
-  text
-  movie (ForeignKey => movies.Movie, null,blank)
-  book (ForeignKey => movies.Movie, null,blank)
-  rating
-"""
+  """ Review Model """ 
 
-class Review(core_models.TimeStampedModel):
-  created_by = models.ForeignKey("users.User", on_delete=models.CASCADE)
+  created_by = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="reviews")
   text = models.TextField()
-  movie = models.ForeignKey("movies.Movie", on_delete=models.CASCADE, null=True, blank=True )
-  book = models.ForeignKey("books.Book", on_delete=models.CASCADE, null=True,blank= True)
+  movie = models.ForeignKey("movies.Movie", on_delete=models.CASCADE, related_name="reviews")
+  book = models.ForeignKey("books.Book", on_delete=models.CASCADE, related_name="reviews")
   rating = models.IntegerField()
 
   def __str__(self):
-    return f"{self.created_by.username} / {self.movie} / {self.book}"
+    return self.text

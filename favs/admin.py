@@ -1,9 +1,7 @@
 from django.contrib import admin
-from . import models
+from favs.models import FavList
 
-@admin.register(models.FavList)
+@admin.register(FavList)
 class FavListAdmin(admin.ModelAdmin):
 
-    """FavList Admin Definition"""
-    pass
-
+  list_display = ("created_by",)

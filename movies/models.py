@@ -1,31 +1,17 @@
 from django.db import models
+from core.models import CoreModel
 
-from core import models as core_models
+class Movie(CoreModel):
 
-# Create your models here.
-"""
-Here are the models you have to create:
-- Movie:
-  title
-  year
-  cover_image
-  rating
-  category (ManyToMany => categories.Category)
-  director (ForeignKey => people.Person)
-  cast (ManyToMany => people.Person)
-"""
-
-class Movie(core_models.TimeStampedModel):
-      
-  """Movie Model Definition"""
+  """ Movie Model """
 
   title = models.CharField(max_length=120)
-  year = models.DateField()  
-  cover_image = models.ImageField( blank=True)
+  year = models.IntegerField()
+  cover_image = models.ImageField()
   rating = models.IntegerField()
-  category = models.ForeignKey("categories.Category", on_delete=models.CASCADE)
-  director = models.ForeignKey("people.Person_Director", on_delete=models.CASCADE)
-  cast = models.ManyToManyField("people.Person_Actor", blank=True)
+  category = models.ForeignKey("categories.Category", on_delete=models.CASCADE, related_name="movies", limit_choices_to={"kind": "movie",})
+  director = models.ForeignKey("people.Person", on_delete=models.CASCADE, related_name="movies", limit_choices_to={"kind": "director",})
+  cast = models.ManyToManyField("people.Person", limit_choices_to={"kind": "actor",})
 
   def __str__(self):
     return self.title
