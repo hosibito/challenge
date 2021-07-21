@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+from . import models as books_models
+
+def all_books(request):
+    return render(request, "books/book_list.html")
