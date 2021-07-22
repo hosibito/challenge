@@ -1,0 +1,28 @@
+<h1>People_list</h1>
+
+{% for obj in page_obj.object_list %}
+    <h3>{{ obj.name }} / {{ obj.kind }} </h3>
+{% endfor %}
+
+{% for page in page_obj.paginator.page_range %}
+    <a href="?page={{page}}">{{page}}</a>
+{% endfor %}
+
+<h5>
+    {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+
+    {% if page_obj.has_next  %}
+        <a href="?page={{page_obj.next_page_number}}">Next</a>
+    {% endif %}
+</h5>
+
+
+
+
+    
+
+    
