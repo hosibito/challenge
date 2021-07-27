@@ -1,17 +1,35 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.core.paginator import EmptyPage, Paginator
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from . import models as books_models
 
-def resolve_books(request):
 
-    page = request.GET.get("page", 1)
-    book_list = books_models.Book.objects.all()
-    paginator = Paginator(book_list, 10, orphans=4)
+class BooksView(ListView):
 
-    try:
-        page_obj = paginator.page(int(page))
-        return render(request, "books/books.html", {"page_obj" : page_obj})
-    except EmptyPage:
-        return redirect(reverse("core:home"))
+    """ BooksView Definition """
+
+    model = books_models.Book
+    paginate_by = 10
+    paginate_orphans = 4
+    
+
+class BooksDetail(DetailView):
+
+    """ BookDetail Deginition """
+
+    model = books_models.Book
+
+class BooksCreate(CreateView):
+
+    """ BookCreate Deginition """
+
+    model = books_models.Book
+    fields = ['title',"year",'rating','category','writer' ]
+
+
+class BooksUpdate(UpdateView):
+
+    """ BookUpdate Deginition """
+
+    model = books_models.Book
+    fields = ['title',"year",'rating','category','writer' ]
+    template_name_suffix = '_update_form'

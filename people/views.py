@@ -1,17 +1,34 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.core.paginator import EmptyPage, Paginator
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from . import models as people_models
 
-def resolve_people(request):
-    page = request.GET.get("page", 1)
-    people_list = people_models.Person.objects.all()
-    paginator = Paginator(people_list, 10, orphans=4)
 
-    try:
-        page_obj = paginator.page(int(page))
-        return render(request, "people/people.html", {"page_obj" : page_obj})
-    except EmptyPage:
-        return redirect(reverse("core:home"))
+class PeopleView(ListView):
+
+    """ PeopleView Definition """
+
+    model = people_models.Person
+    paginate_by = 10
+    paginate_orphans = 4
     
+class PeopleDetail(DetailView):
+    
+    """ BookDetail Deginition """
+
+    model = people_models.Person
+
+class PeopleCreate(CreateView):
+
+    """ BookCreate Deginition """
+
+    model = people_models.Person
+    fields = ['name',"kind" ]
+
+
+class PeopleUpdate(UpdateView):
+
+    """ BookUpdate Deginition """
+
+    model = people_models.Person
+    fields = ['name',"kind" ]
+    template_name_suffix = '_update_form'

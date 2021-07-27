@@ -1,1 +1,28 @@
-<h1>Welcome home</h1>
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Home
+{% endblock page_title %}
+
+{% block content %}
+    <h1>Welcome home</h1>
+
+    <h3><a href="{% url 'books:books' %}">Books list</a></h3>
+
+    {% for obj in books_list %}
+        <h5>{{ obj.title }} / {{ obj.year }} / {{ obj.rating }} / {{ obj.category }}/ {{ obj.writer }}</h5>
+    {% endfor %}
+
+    <h3><a href="{% url 'movies:movies' %}">Movie list</a></h3>  
+
+    {% for obj in movies_list %}
+        <h5>{{ obj.title }} / {{ obj.year }} / {{ obj.rating }} / {{ obj.category }}/ {{ obj.director }}</h5>
+    {% endfor %}
+
+    <h3><a href="{% url 'people:people' %}">People list</a></h3>    
+
+    {% for obj in people_list %}
+        <h5>{{ obj.name }} / {{ obj.kind }} </h5>
+    {% endfor %}
+
+{% endblock content %}

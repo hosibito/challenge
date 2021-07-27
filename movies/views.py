@@ -1,17 +1,37 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.core.paginator import EmptyPage, Paginator
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from . import models as movies_models
 
-def resolve_movies(request):
+class MoviesView(ListView):
 
-    page = request.GET.get("page", 1)
-    movie_list = movies_models.Movie.objects.all()
-    paginator = Paginator(movie_list, 10, orphans=4)
+    """ MoviesView Definition """
 
-    try:
-        page_obj = paginator.page(int(page))
-        return render(request, "movies/movies.html", {"page_obj" : page_obj})
-    except EmptyPage:
-        return redirect(reverse("core:home"))
+    model = movies_models.Movie
+    paginate_by = 10
+    paginate_orphans = 4
+
+
+class MoviesDetail(DetailView):
+
+    """ MoviesDetail Deginition """   
+
+    model = movies_models.Movie
+  
+    
+
+class MoviesCreate(CreateView):
+    
+    """ MoviesCreate Deginition """
+
+    model = movies_models.Movie
+    fields = ['title',"year",'rating','category','director' , 'cast']
+
+
+class MoviesUpdate(UpdateView):
+
+    """ MoviesUpdate Deginition """
+
+    model = movies_models.Movie
+    fields = ['title',"year",'rating','category','director' , 'cast']
+    template_name_suffix = '_update_form'
+    

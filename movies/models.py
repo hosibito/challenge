@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from core.models import CoreModel
 
 class Movie(CoreModel):
@@ -15,3 +16,6 @@ class Movie(CoreModel):
 
   def __str__(self):
     return self.title
+
+  def get_absolute_url(self):
+        return reverse('movies:detail', kwargs={'pk': self.pk})

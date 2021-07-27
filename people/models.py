@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from core.models import CoreModel
 
 class Person(CoreModel):
@@ -21,3 +22,6 @@ class Person(CoreModel):
 
   def __str__(self):
     return self.name
+
+  def get_absolute_url(self):
+      return reverse('people:detail', kwargs={'pk': self.pk})
