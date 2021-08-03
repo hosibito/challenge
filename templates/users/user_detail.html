@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    User Profile
+{% endblock page_title %}
+
+{% block content %}  
+   <li>
+        <ul>username: {{user_obj.username}}</ul>
+        <ul>first_name: {{user_obj.first_name}}</ul>
+        <ul>last_name: {{user_obj.last_name}}</ul>
+        <ul>email: {{user_obj.email}}</ul>
+        <ul>bio: {{user_obj.bio}}</ul>
+        <ul>preference: {{user_obj.preference}}</ul>
+        <ul>language: {{user_obj.language}}</ul>
+        <ul>fav_book_cat: {{user_obj.fav_book_cat}}</ul>
+        <ul>fav_movie_cat: {{user_obj.fav_movie_cat}}</ul>
+   </li>
+
+   <div>
+       <a href="{% url 'users:update' %}">Edit Profile</a>
+   </div>
+{% endblock content %}
