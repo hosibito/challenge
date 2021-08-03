@@ -31,11 +31,11 @@ class SignUpView(FormView):
     form_class = users_forms.SignUpForm
     success_url = reverse_lazy("core:home")
 
-    initial = {  # 폼에 들어갈 기본 데이터를 미리 입력
-        "first_name": "Nicoas",
-        "last_name": "Serr",
-        "email": "itn@las.com",
-        }
+    # initial = {  # 폼에 들어갈 기본 데이터를 미리 입력
+    #     "first_name": "Nicoas",
+    #     "last_name": "Serr",
+    #     "email": "itn@las.com",
+    #     }
 
     def form_valid(self, form):
         form.save()

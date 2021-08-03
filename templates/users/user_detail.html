@@ -4,20 +4,97 @@
     User Profile
 {% endblock page_title %}
 
-{% block content %}  
-   <li>
-        <ul>username: {{user_obj.username}}</ul>
-        <ul>first_name: {{user_obj.first_name}}</ul>
-        <ul>last_name: {{user_obj.last_name}}</ul>
-        <ul>email: {{user_obj.email}}</ul>
-        <ul>bio: {{user_obj.bio}}</ul>
-        <ul>preference: {{user_obj.preference}}</ul>
-        <ul>language: {{user_obj.language}}</ul>
-        <ul>fav_book_cat: {{user_obj.fav_book_cat}}</ul>
-        <ul>fav_movie_cat: {{user_obj.fav_movie_cat}}</ul>
-   </li>
+{% block content %} 
 
-   <div>
-       <a href="{% url 'users:update' %}">Edit Profile</a>
-   </div>
+    <div class="container mx-auto pb-10 w-1/2">
+        <div class="mx-4">
+            <div class=" bg-gray-400  h-8 rounded-md">
+                <a href="{{user.get_absolute_url}}" class="h-full w-full flex items-center justify-center">
+                <span class="text-gray-800"><i class="fas fa-id-badge mr-2"></i>User Profile</span> 
+                </a>
+            </div>          
+            <ul>              
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        username: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{user_obj.username}}
+                    </span>                                                      
+                </li>  
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        first_name: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{user_obj.first_name}}
+                    </span>                                                      
+                </li> 
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        last_name: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{user_obj.last_name}}
+                    </span>                                                      
+                </li> 
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        email: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{user_obj.email}}
+                    </span>                                                      
+                </li> 
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        bio: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{user_obj.bio}}
+                    </span>                                                      
+                </li> 
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        preference: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{user_obj.preference}}
+                    </span>                                                      
+                </li> 
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        language: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{user_obj.language}}
+                    </span>                                                      
+                </li> 
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        fav_book_cat: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{user_obj.fav_book_cat}}
+                    </span>                                                      
+                </li> 
+                <li class="overflow-hidden flex px-2 py-2"> 
+                    <span class=" w-6/12 text-xl text-gray-600 ">                            
+                        fav_movie_cat: 
+                    </span>
+                    <span class=" w-6/12 text-orange-800">
+                        {{fav_movie_cat.bio}}
+                    </span>                                                      
+                </li> 
+            </ul>        
+        </div>
+        <div class=" flex justify-end">
+            <a href="{% url 'users:update' %}" 
+                class="uppercase mr-1 font-medium text-xs border border-black text-black rounded py-px px-1">
+                    Edit Profile
+            </a>
+        </div>
+    </div>
+
+
 {% endblock content %}

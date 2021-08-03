@@ -1,17 +1,29 @@
-<header>
-    <a href="{% url 'core:home' %}">Home</a>               
-    <ul>
-        {% if user.is_authenticated %}
-            <li><a href="{% url 'users:logout' %}">Log out</a></li>
-            <li><a href="{{user.get_absolute_url}}">Profile</a></li>            
-        {% else %}
-            <li><a href="{% url 'users:login' %}">Login</a></li>
-            <li><a href="{% url 'users:signup' %}">Sign up</a></li>
-        {% endif %}   
+<header class="container fixed bg-black text-white inset-0 max-w-full flex items-center justify-between px-6 h-20">
+    <div class="flex items-center w-1/3">
+        <a href="{% url 'core:home' %}" class=" mr-6"><i class="fas fa-home"></i> Home</a>               
 
-        <form method="get" action="{% url 'core:search' %}">
-            <input name="city" placeholder="Search" />
+        <form method="get" action="{% url 'core:search' %}" class="w-9/12">
+            <input name="search" placeholder="Search" 
+                class="search-box border w-full px-5 py-2 font-medium text-gray-900 placeholder-gray-600 rounded-lg shadow-md hover:shadow-lg focus:outline-none"/>
         </form>
+    </div>
+
+    <ul class=" flex items-center font-medium h-full">
+        {% if user.is_authenticated %}
+            <li class="ml-8 border-b-2 border-black hover:border-white h-full flex items-center">
+                <a href="{% url 'users:logout' %}" class="py-10 px-5">Log out</a>
+            </li>
+            <li class="ml-8 border-b-2 border-black hover:border-white h-full flex items-center">
+                <a href="{{user.get_absolute_url}}" class="py-10 px-5">Profile</a>
+            </li>            
+        {% else %}
+            <li class="ml-8 border-b-2 border-black hover:border-white h-full flex items-center">
+                <a href="{% url 'users:login' %}" class="py-10 px-5">Login</a>
+            </li>
+            <li class="ml-8 border-b-2 border-black hover:border-white h-full flex items-center">
+                <a href="{% url 'users:signup' %}" class="py-10 px-5">Sign up</a>
+            </li>
+        {% endif %}   
     </ul>    
 </header> 
 
