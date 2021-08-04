@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.views.generic import View
 
 from movies import models as movie_models
 from books import models as book_models
@@ -17,5 +19,14 @@ def home(request):
         "people_list": people_list,
         })
 
-def search(request):
-    return render(request, "core/search.html")
+class SearchView(View):    
+    def get(self, request):
+        search = request.GET.get("search")     
+        if search:
+            movie_reselt = movie_models.Movie.objects.filter(title__startswith=search)
+            book_reselt = book_models.Book.objects.filter(title__startswith=search)
+            people_reselt = people_models.Person.objects.filter(name__startswith=search)
+        else:
+            return redirect(reverse("core:home"))
+
+        return render(request, "core/search.html" ,{"movie_reselt":movie_reselt, "book_reselt":book_reselt, "people_reselt":people_reselt})

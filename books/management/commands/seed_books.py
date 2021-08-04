@@ -33,7 +33,8 @@ class Command(BaseCommand):  # 노트 9 참조
             total,
             {
                 "title": lambda x: seeder.faker.sentence(),  
-                "year": lambda x: random.randint(1980, 2022),              
+                "year": lambda x: random.randint(1980, 2022), 
+                "cover_image": lambda x:f"book/{random.randint(1, 17)}.webp",        
                 "rating": lambda x: random.randint(1,6),
                 "category": lambda x: random.choice(books_categories),
                 "writer": lambda x: random.choice(writer_people),                             

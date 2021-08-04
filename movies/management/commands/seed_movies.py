@@ -27,7 +27,7 @@ class Command(BaseCommand):  # 노트 9 참조
     def handle(self, *args, **options):
         total = options.get("total")
         seeder = Seed.seeder()     
-        movie_categories = categories_models.Category.objects.filter(Q(kind="movie")|Q(kind="both"))
+        movie_categories = categories_models.Category.objects.filter(kind="movie")
         director_people = people_models.Person.objects.filter(kind="director")
         actor_people = people_models.Person.objects.filter(kind="actor")
         seeder.add_entity(
@@ -35,7 +35,8 @@ class Command(BaseCommand):  # 노트 9 참조
             total,
             {
                 "title": lambda x: seeder.faker.sentence(),  
-                "year": lambda x: random.randint(1980, 2022),              
+                "year": lambda x: random.randint(1980, 2022),   
+                "cover_image": lambda x:f"movie/{random.randint(1, 26)}.jpg",        
                 "rating": lambda x: random.randint(1,6),
                 "category": lambda x: random.choice(movie_categories),
                 "director": lambda x: random.choice(director_people),                             

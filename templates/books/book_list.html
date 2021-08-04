@@ -14,6 +14,7 @@
             </div>            
             <ul>
                 {% for obj in page_obj.object_list %}
+                <a href="{% url 'books:detail' obj.pk %}">
                     <li class="overflow-hidden flex items-center justify-between px-2 py-2"> 
                         <span class=" w-6/12 text-xl text-gray-600  block truncate">                            
                             {{ obj.title }}  
@@ -30,7 +31,8 @@
                         <span class=" w-2/12 text-orange-400  block truncate ">
                             {{ obj.writer }}
                         </span>
-                    </li>                        
+                    </li>                       
+                </a>
                 {% endfor %}
             </ul>        
         </div>

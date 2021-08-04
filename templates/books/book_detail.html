@@ -5,17 +5,39 @@
 {% endblock page_title %}
 
 {% block content %} 
-    <h2>{{book.title}}</h2>
+    <div class="container mx-auto pb-10">
+        <div class=" flex items-center justify-center flex-col w-full">
+            <div class=" bg-gray-400 h-8 rounded-md mb-8 w-8/12">
+                <a href="{% url 'books:detail' book.pk %}" class="h-full w-full flex items-center justify-center">
+                <span class="text-gray-800"><i class="fas fa-book-open mr-2"></i>{{book.title}}</span> 
+                </a>
+            </div>   
+            
+            <div class=" flex items-stretch w-8/12 mb-8">
+                <div class="w-1/3 flex items-center justify-center bg-gray-400 p-4 rounded-lg">
+                    <img src="{{ book.cover_image.url }}" alt="북커버이미지" >
+                </div>
 
-    <div>
-        <h3>writer : {{ book.writer }}</h3>  
-        <h3>year : {{ book.year }} </h3>
-        <h3>rating : {{ book.rating }} </h3>
-        <h3>category : {{ book.category }}</h3>          
-    </div>    
-
-    <a href="{% url 'books:update' book.pk %}">Update book</a>
-    <br/><br/>
-    <a href="{% url 'books:books' %}">back book list</a>
- 
+                <div class=" w-2/3 flex flex-col items-stretch justify-items-stretch">
+                    <div class="bg-gray-400 rounded-lg ml-6 h-full p-4 flex flex-col justify-around text-2xl">
+                        <h3>writer : {{ book.writer }}</h3>  
+                        <h3>year : {{ book.year }} </h3>
+                        <h3>rating : {{ book.rating }} </h3>
+                        <h3>category : {{ book.category }}</h3>  
+                    </div>
+                </div>
+            </div>      
+            <div class="bg-gray-400 rounded-lg p-4 w-8/12 flex items-center justify-around">
+                <a href="{% url 'books:books' %}"
+                    class=" mr-1 font-medium text-xs border border-black text-black rounded py-px px-1">
+                    back book list
+                </a>
+                <a href="{% url 'books:update' book.pk %}"
+                    class=" mr-1 font-medium text-xs border border-black text-black rounded py-px px-1">
+                    Update book
+                </a>           
+            </div>
+        </div>    
+    </div>
+    
 {% endblock content %}

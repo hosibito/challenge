@@ -28,6 +28,7 @@ class Command(BaseCommand):  # 노트 9 참조
             total,
             {
                 "name": lambda x: seeder.faker.name(),
+                "photo": lambda x:f"people/{random.randint(1, 41)}.jpg",   
                 "kind": lambda x: random.choice(["actor","director","writer"]),
             }
         )

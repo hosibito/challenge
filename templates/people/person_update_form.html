@@ -4,13 +4,15 @@
     People_Update
 {% endblock page_title %}
 
-{% block content %}    
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <input type="submit" value="Save">
-    </form>
+{% block content %}   
+    <div class="container mx-auto my-10 flex flex-col items-center border p-5 lg:w-5/12 md:w-6/12 xl:w-4/12 " >       
+                    
+        {% include 'mixins/auth/auth_form.html' with form=form cta="People_Update" %}
+        <!-- #20 MAKE IT ALL BEAUTIFUL Form 에러 처리(부품으로 만들기) 참고 -->
 
-    <a href="{% url 'people:people' %}">back people list</a>
- 
+        <div class="mt-5">
+            <span class="mr-2">Do you want back people list?</span>
+            <a href="{% url 'people:people' %}" class="text-teal-500 font-medium">back people list</a>
+        </div>
+    </div>    
 {% endblock content %}

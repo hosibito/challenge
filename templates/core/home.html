@@ -19,14 +19,16 @@
                 </div>            
                 <ul>
                     {% for obj in books_list %}
-                        <li class="overflow-hidden flex items-center justify-between px-2 py-2"> 
-                            <span class=" text-xl text-gray-600  block truncate">                            
-                                {{ obj.title }}  
-                            </span>
-                            <span class=" text-orange-400  block truncate ">
-                                {{ obj.writer }}
-                            </span>
-                        </li>                        
+                        <a href="{% url 'books:detail' obj.pk %}">
+                            <li class="overflow-hidden flex items-center justify-between px-2 py-2"> 
+                                <span class=" text-xl text-gray-600  block truncate">                            
+                                    {{ obj.title }}  
+                                </span>
+                                <span class=" text-orange-400  block truncate ">
+                                    {{ obj.writer }}
+                                </span>
+                            </li>    
+                        </a>
                     {% endfor %}
                 </ul>
                
@@ -40,14 +42,16 @@
                 
                 <ul>
                     {% for obj in movies_list %}
-                        <li class="overflow-hidden flex items-center justify-between px-2 py-2"> 
-                            <span class=" text-xl text-gray-600  block truncate">                            
-                                {{ obj.title }}  
-                            </span>
-                            <span class=" text-orange-400  block truncate ">
-                                {{ obj.director }}
-                            </span>
-                        </li>                        
+                        <a href="{% url 'movies:detail' obj.pk %}">
+                            <li class="overflow-hidden flex items-center justify-between px-2 py-2"> 
+                                <span class=" text-xl text-gray-600  block truncate">                            
+                                    {{ obj.title }}  
+                                </span>
+                                <span class=" text-orange-400  block truncate ">
+                                    {{ obj.director }}
+                                </span>
+                            </li>  
+                        </a>
                     {% endfor %}
                 </ul>        
                
@@ -61,14 +65,16 @@
     
                 <ul>
                     {% for obj in people_list %}
-                        <li class="overflow-hidden flex items-center justify-between px-2 py-2"> 
-                            <span class=" text-xl text-gray-600  block truncate">                            
-                                {{ obj.name }}  
-                            </span>
-                            <span class=" text-orange-400  block truncate ">
-                                {{ obj.kind }}
-                            </span>
-                        </li>                        
+                        <a href="{% url 'people:detail' obj.pk %}">
+                            <li class="overflow-hidden flex items-center justify-between px-2 py-2"> 
+                                <span class=" text-xl text-gray-600  block truncate">                            
+                                    {{ obj.name }}  
+                                </span>
+                                <span class=" text-orange-400  block truncate ">
+                                    {{ obj.kind }}
+                                </span>
+                            </li>  
+                        </a>
                     {% endfor %}
                 </ul>  
             </div>
