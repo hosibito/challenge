@@ -6,13 +6,14 @@ from django.shortcuts import render, redirect, reverse
 
 from . import forms as users_forms
 from . import models as users_models
+from . import mixins as users_mixins
 
 # Create your views here.
 
-class LoginView(FormView):
+class LoginView(users_mixins.LoggedOutOnlyView, FormView):
     template_name = "users/login.html"
     form_class = users_forms.LoginForm   # () 없음에 주의
-    success_url = reverse_lazy("core:home")  # url을 부를때 생성
+    # success_url = reverse_lazy("core:home")  # url을 부를때 생성
     
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
@@ -21,12 +22,21 @@ class LoginView(FormView):
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        next_arg = self.request.GET.get("next")
+        if next_arg is not None:
+            return next_arg
+        else:
+            return reverse("core:home")
 
 def log_out(request):
     logout(request)
     return redirect(reverse("core:home"))
 
-class SignUpView(FormView):
+
+
+class SignUpView(users_mixins.LoggedOutOnlyView, FormView):
     template_name = "users/signup.html"
     form_class = users_forms.SignUpForm
     success_url = reverse_lazy("core:home")
@@ -47,12 +57,11 @@ class SignUpView(FormView):
         return super().form_valid(form)
 
 
-class UserProfileView(DetailView):
+class UserProfileView(users_mixins.LoggedInOnlyView, DetailView):
     model = users_models.User
-    context_object_name = "user_obj"  # 섞이면 안된다. 
+    context_object_name = "user_obj"  # 섞이면 안된다.   
 
-
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(users_mixins.LoggedInOnlyView, UpdateView):
     model = users_models.User
     template_name = "users/update-profile.html" # rlqhsrkqt user_form.html
     fields = (
@@ -68,6 +77,6 @@ class UpdateProfileView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-class UpdatePasswordView(PasswordChangeView):
+class UpdatePasswordView(users_mixins.LoggedInOnlyView, PasswordChangeView):
     
     template_name = "users/update-password.html"

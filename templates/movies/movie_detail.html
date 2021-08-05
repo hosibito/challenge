@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load is_favs %}
+
 {% block page_title %}
     Movie_Detail
 {% endblock page_title %}
@@ -40,7 +42,20 @@
                 <a href="{% url 'movies:update' movie.pk %}"
                     class=" mr-1 font-medium text-xs border border-black text-black rounded py-px px-1">
                     Update movie
-                </a>           
+                </a>   
+                {% is_favs request.user.pk movie.pk 'movie' as is_favs_bool %}   
+                
+                {% if is_favs_bool %}
+                    <span class="mr-1 font-medium text-xs bg-yellow-600  rounded py-px px-1">
+                        My Favs Already Taken
+                    </span>
+                {% else %}
+                    <a href="{% url 'favs:add' request.user.pk %}?tpk={{movie.pk}}&type=movie"
+                        class=" mr-1 font-medium text-xs bg-blue-600 text-orange-300 rounded py-px px-1">
+                        Add My Favs movie
+                    </a>  
+                {% endif %}
+                    
             </div>
         </div>    
     </div>

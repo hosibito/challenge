@@ -13,6 +13,9 @@
     <ul class=" flex items-center font-medium h-full">
         {% if user.is_authenticated %}
             <li class="ml-8 border-b-2 border-black hover:border-white h-full flex items-center">
+                <a href="{% url 'favs:list' request.user.pk %}" class="py-10 px-5">My Favs</a>
+            </li>
+            <li class="ml-8 border-b-2 border-black hover:border-white h-full flex items-center">
                 <a href="{% url 'users:logout' %}" class="py-10 px-5">Log out</a>
             </li>
             <li class="ml-8 border-b-2 border-black hover:border-white h-full flex items-center">
