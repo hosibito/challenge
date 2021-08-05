@@ -34,23 +34,26 @@
                     class=" mr-1 font-medium text-xs border border-black text-black rounded py-px px-1">
                     back book list
                 </a>
-                <a href="{% url 'books:update' book.pk %}"
-                    class=" mr-1 font-medium text-xs border border-black text-black rounded py-px px-1">
-                    Update book
-                </a>   
-
-                {% is_favs request.user.pk book.pk 'book' as is_favs_bool %}   
-                
-                {% if is_favs_bool %}
-                    <span class="mr-1 font-medium text-xs bg-yellow-600  rounded py-px px-1">
-                        My Favs Already Taken
-                    </span>   
-                {% else %}
-                    <a href="{% url 'favs:add' request.user.pk %}?tpk={{book.pk}}&type=book"
-                        class="mr-1 font-medium text-xs bg-blue-600 text-orange-300 rounded py-px px-1">
-                        Add My Favs book
-                    </a>    
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'books:update' book.pk %}"
+                        class=" mr-1 font-medium text-xs border border-black text-black rounded py-px px-1">
+                        Update book
+                    </a>   
+                               
+                    {% is_favs request.user.pk book.pk 'book' as is_favs_bool %}   
+                    
+                    {% if is_favs_bool %}
+                        <span class="mr-1 font-medium text-xs bg-yellow-600  rounded py-px px-1">
+                            My Favs Already Taken
+                        </span>   
+                    {% else %}
+                        <a href="{% url 'favs:add' request.user.pk %}?tpk={{book.pk}}&type=book"
+                            class="mr-1 font-medium text-xs bg-blue-600 text-orange-300 rounded py-px px-1">
+                            Add My Favs book
+                        </a>    
+                    {% endif %}                    
                 {% endif %}
+                    
                         
             </div>
         </div>    

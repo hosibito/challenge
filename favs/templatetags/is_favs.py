@@ -10,7 +10,10 @@ register = template.Library()
 @register.simple_tag
 def is_favs(user_pk, t_pk, type):
     user = users_models.User.objects.get(pk=user_pk)   
-    my_fav = favlist_models.FavList.objects.get(created_by = user)      
+    try:
+        my_fav = favlist_models.FavList.objects.get(created_by = user)
+    except:
+        my_fav = favlist_models.FavList.objects.create(created_by = user)      
 
     if type == "book":
         try:
