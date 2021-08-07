@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load is_favs %}
+{% load is_favs is_reviews %}
 
 {% block page_title %}
     Book_Detail
@@ -28,8 +28,9 @@
                         <h3>category : {{ book.category }}</h3>  
                     </div>
                 </div>
-            </div>      
-            <div class="bg-gray-400 rounded-lg p-4 w-8/12 flex items-center justify-around">
+            </div>     
+
+            <div class="bg-gray-400 rounded-lg p-4 w-8/12 flex items-center justify-around mb-8">
                 <a href="{% url 'books:books' %}"
                     class=" mr-1 font-medium text-xs border border-black text-black rounded py-px px-1">
                     back book list
@@ -52,11 +53,68 @@
                             Add My Favs book
                         </a>    
                     {% endif %}                    
-                {% endif %}
-                    
-                        
+                {% endif %}                 
             </div>
-        </div>    
+        </div>  
+
+        <div class="flex items-center justify-center flex-col w-full">
+
+            {% is_reviews request.user.pk book.pk 'book' as is_reviews_bool %}   
+            
+            {% if not is_reviews_bool %}
+                <div class=" bg-gray-400 h-auto rounded-md mb-8 w-8/12">
+                    <span class="flex items-center justify-center my-2">
+                        리뷰를 작성해 주시겠어요?
+                    </span>             
+                    <form action="{% url 'reviews:create' book.pk 'book' %}" method="POST" class="review mx-auto">
+                        {% csrf_token %}      
+                        
+                        {% if form.non_field_errors %}
+                            {% for error in form.non_field_errors %}
+                                <span class="text-red-700 font-medium text-sm">{{error}}</span> 
+                            {% endfor %}
+                        {% endif %}                    
+                        
+                        {% for field in form %}
+                            {% include 'mixins/auth/form_input.html' with field=field %}
+                        {% endfor %}
+                        <button class="btn bg-yellow-600 text-blue-900">Submit</button>
+                    </form>
+                </div>   
+            {% endif %}                
+
+            <div class=" bg-gray-400 h-auto rounded-md w-8/12">
+                {% for obj in reviews %}  
+                    <li class="overflow-hidden flex items-center justify-between px-2 py-2 border-b "> 
+                        <div class=" w-8/12 text-xl text-gray-600  block ">
+                            {{ obj.text }}  
+                        </div>                                         
+                        <span class=" w-2/12 text-xl text-red-400 flex justify-center">                            
+                            {{ obj.rating }}  
+                        </span>  
+                        
+                        {% if obj.created_by.username == request.user.username %}                            
+                            <div class=" flex w-4/12 text-xl text-gray-800 mr-2">
+                                <span class=" mr-4">                            
+                                    {{ obj.created_by.username }}  
+                                </span>                             
+                                <a href="{% url 'reviews:delete' obj.pk 'book'%}" 
+                                    class="mr-1 font-medium text-xs bg-red-600 text-orange-300 rounded py-px px-1 flex items-center">
+                                    delete
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="w-4/12 text-xl text-gray-800 mr-2 flex justify-center">
+                                <span class=" ">                            
+                                    {{ obj.created_by.username }}  
+                                </span>    
+                            </div>
+                        {% endif %}
+                            
+                    </li>  
+                {% endfor %}              
+            </div>
+        </div>   
     </div>
     
 {% endblock content %}
